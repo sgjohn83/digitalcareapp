@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" columnCount="4" pageWidth="297" pageHeight="421" columnWidth="71" leftMargin="13" rightMargin="0" topMargin="0" bottomMargin="0" uuid="790cf1f3-a036-44df-b705-10dac22bc63e">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="398"/>
+	<parameter name="billno" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from complaint where receipt_no=$P{billno}]]>
+	</queryString>
+	<field name="CNAME" class="java.lang.String"/>
+	<field name="CONTACT_NO" class="java.math.BigDecimal"/>
+	<field name="PHONE_MODEL" class="java.lang.String"/>
+	<field name="COMPLAINT_NAME" class="java.lang.String"/>
+	<field name="RECVD_ACCR" class="java.lang.String"/>
+	<field name="RECVD_BY" class="java.lang.String"/>
+	<field name="RECEIPT_NO" class="java.lang.String"/>
+	<field name="RECVD_DATE" class="java.sql.Timestamp"/>
+	<field name="EST_CHARGS" class="java.math.BigDecimal"/>
+	<field name="RECVD_TIME" class="java.lang.String"/>
+	<field name="IMEI_NO" class="java.math.BigDecimal"/>
+	<field name="ASSIGNED_TO" class="java.lang.String"/>
+	<field name="IMAGE_NAMES" class="java.lang.String"/>
+	<field name="EMAIL" class="java.lang.String"/>
+	<field name="ADVANCE" class="java.math.BigDecimal"/>
+	<field name="BALANCE" class="java.math.BigDecimal"/>
+	<title>
+		<band height="119" splitType="Stretch">
+			<staticText>
+				<reportElement x="67" y="86" width="152" height="33" uuid="169f3e6e-a7fd-46b1-bb65-a22bafc3a3eb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="15" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[SERVICE BILL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="33" width="220" height="22" uuid="145d5cd9-169f-4eb6-aceb-3920a4fbd3a9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DIGITAL ELECTRONICS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="28" y="55" width="220" height="20" uuid="c80b8ac9-c495-40a7-9b9c-16b795355690"/>
+				<textElement>
+					<font fontName="SansSerif" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cell Phone Servicing center, Kavali]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="76" width="28" height="20" uuid="c715d2ee-7db0-4a71-868b-b67966f13649"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Date:]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="28" y="76" width="94" height="20" uuid="d273b273-638e-4af9-badc-ae8a3d50e761"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RECVD_DATE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="183" y="76" width="36" height="20" uuid="569b5d0a-669d-4aac-8231-14b50858ad2a"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Time:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="219" y="76" width="71" height="20" uuid="d06f3f88-02b6-4c58-8656-a701e0b7ecbd"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RECVD_TIME}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="-1" y="75" width="274" height="1" uuid="b9447756-5c62-4d5a-bfe2-08d0f9041f65"/>
+			</line>
+			<staticText>
+				<reportElement x="230" y="13" width="54" height="20" uuid="f0f89a48-02d7-419a-a1ab-170c9eea42f4"/>
+				<textElement>
+					<font fontName="SansSerif" size="7" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Prop: Sk Riyaz]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="257" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="273" height="257" uuid="09812a22-b2ba-404c-b2b8-c358192eb81e"/>
+			</rectangle>
+			<textField>
+				<reportElement x="74" y="12" width="72" height="20" uuid="7f43f56f-89e4-47b1-8b32-1d55f9429179"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RECEIPT_NO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="12" width="74" height="20" uuid="1913ace4-2d6e-46d1-95a3-f863c33dcf5a"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Service ID:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="75" y="47" width="72" height="20" uuid="15aa8eb9-f819-46bf-8baf-395a8fdd6fa3"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CNAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="47" width="74" height="20" uuid="47e8e7fa-7e9d-4a47-943a-89f5becad7ee"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Customer Name:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="75" y="82" width="72" height="20" uuid="47c591f3-3f4a-48ec-b25f-db0d58f0759a"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CONTACT_NO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-1" y="82" width="74" height="20" uuid="32e7751e-b594-4931-af35-d521bea38e49"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contact No:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="75" y="117" width="72" height="35" uuid="3a5318eb-f0f1-4ae1-9b70-703dc8c480ec"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RECVD_ACCR}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="117" width="74" height="35" uuid="e769ea31-e785-446b-a349-794ff385d0d2"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recieved accessories:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="74" y="152" width="73" height="20" uuid="467b00ec-6106-423b-9329-b5e51eb02325"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PHONE_MODEL}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="-1" y="152" width="73" height="20" uuid="302e349a-5282-4476-aaa7-c6809ceba1d8"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Phone Model:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="219" y="12" width="71" height="20" uuid="3fe9d1f6-b2cb-4b3c-9955-14e7914b9fb2"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EST_CHARGS}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="146" y="12" width="73" height="20" uuid="ed11286a-7cb4-4952-b0e2-b19147011ec9"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total Amount:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="219" y="47" width="71" height="20" uuid="32bf2e84-0c45-4e9a-8702-848152fb0794"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ADVANCE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="147" y="47" width="72" height="20" uuid="850ae769-a757-4a45-a0df-e29028044622"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Advance:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="219" y="83" width="71" height="20" uuid="6e8b1d85-8d47-451d-b790-ce831514d6a9"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BALANCE}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="146" y="82" width="73" height="20" uuid="f5796076-b328-4d42-b1c1-bf262e57b965"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Balance:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="146" y="82" width="127" height="1" uuid="0d264bcd-17c1-4257-9dd4-93a17e93cb24"/>
+			</line>
+			<line>
+				<reportElement x="146" y="102" width="127" height="1" uuid="422446c5-1eaa-43ee-878d-4d1e4197cfed"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="75" y="188" width="72" height="20" uuid="16c54bf1-5dc4-44b7-b922-0c7897cfd776"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{COMPLAINT_NAME}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="188" width="72" height="20" uuid="11001429-4af8-4e6c-aab7-2d724f9a8da9"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Complaint:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<textField>
+				<reportElement x="183" y="20" width="101" height="20" uuid="ee809726-7d05-487a-a09a-e99b83a09825"/>
+				<textFieldExpression><![CDATA[$F{RECVD_BY}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="183" y="0" width="101" height="20" uuid="83e99751-00f0-4127-81df-ebefae1e4e5a"/>
+				<textElement>
+					<font fontName="SansSerif"/>
+				</textElement>
+				<text><![CDATA[Recieved By:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>
