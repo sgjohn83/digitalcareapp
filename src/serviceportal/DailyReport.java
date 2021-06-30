@@ -79,7 +79,6 @@ public class DailyReport extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(serviceportal.ServicePortalApp.class).getContext().getResourceMap(DailyReport.class);
-        setTitle(resourceMap.getString("Form.title")); // NOI18N
         setBackground(resourceMap.getColor("Form.background")); // NOI18N
         setName("Form"); // NOI18N
         getContentPane().setLayout(null);
@@ -289,7 +288,7 @@ public class DailyReport extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void getReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getReportActionPerformed
-          // TODO add your handling code here:
+        // TODO add your handling code here:
         String formatted;
         java.util.Date d  = date1.getDate();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yy");
@@ -303,7 +302,7 @@ public class DailyReport extends javax.swing.JFrame {
         }
 
 
-
+       
         String url="select serviceid as ReceiptNo,phone_model,complaint_name,Received_amount as amount,type,to_char(received_date,'dd-MM-yy') as received_date,recieved_time,received_by,cashmode,status,delivery_status from payments p,status s,complaint c where p.serviceid=s.receipt_no and p.serviceid=c.receipt_no and  received_date='"+formatted+"'";
 
 
@@ -404,6 +403,8 @@ public class DailyReport extends javax.swing.JFrame {
        {
            e.printStackTrace();
        }
+
+
     }//GEN-LAST:event_getReportActionPerformed
 
     private void reportItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_reportItemStateChanged
@@ -611,12 +612,12 @@ class MyTableRender12 extends DefaultTableCellRenderer
 {
 
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+       Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
        String status=SearchComplaint.getStatusMode();
 
        Font f = new Font("Courier",Font.PLAIN,24);
-        comp.setFont(f);
+        comp.setFont(f); 
        if(!isSelected)
        {
             if(column!=0)
@@ -626,33 +627,33 @@ class MyTableRender12 extends DefaultTableCellRenderer
                  comp.setFont(f2);
              if(table.getValueAt(row, 9).equals("New") && table.getValueAt(row, 10).equals("NO"))
               {
-
+                
                  comp.setBackground(Color.WHITE);
               }
               else if(table.getValueAt(row, 9).equals("Pending") && table.getValueAt(row, 10).equals("NO"))
               {
-
+               
                   comp.setBackground(Color.YELLOW);
               }
                else if(table.getValueAt(row, 9).equals("Completed") && table.getValueAt(row, 10).equals("NO"))
               {
-
+                   
                    comp.setBackground(Color.GREEN);
               }
                 else if((table.getValueAt(row, 9).equals("Failed") || table.getValueAt(row, 9).equals("Cancelled")) && table.getValueAt(row, 10).equals("NO"))
               {
-
+                 
                     comp.setBackground(Color.RED);
               }
               else if((table.getValueAt(row, 9).equals("Failed") || table.getValueAt(row, 9).equals("Cancelled")) && table.getValueAt(row, 10).equals("Delivered"))
               {
-
-
+                 
+                  
                   comp.setBackground(Color.magenta);
               }
                 else if(table.getValueAt(row, 10).equals("Delivered"))
                 {
-
+                    
                     comp.setBackground(Color.BLUE);
                 }
                 else if(table.getValueAt(row, 10).equals("Returned"))
@@ -664,7 +665,7 @@ class MyTableRender12 extends DefaultTableCellRenderer
             /*   Color c = table.getBackground();
            if((row%2==0) && c.getRed()>10 && c.getGreen()>10 && c.getBlue()>10 )
              comp.setBackground(Color.WHITE);
-             *
+             * 
            else
                comp.setBackground(new Color(238, 224, 229)); */
              else if(column==0)

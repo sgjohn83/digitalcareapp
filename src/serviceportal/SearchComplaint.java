@@ -54,14 +54,15 @@ public class SearchComplaint extends javax.swing.JFrame {
         updatebtn = new javax.swing.JButton();
         Searchbtn = new javax.swing.JButton();
         statusBtn = new javax.swing.JButton();
-        deleteBtn = new javax.swing.JButton();
         deliverBtn = new javax.swing.JButton();
         complButton = new javax.swing.JButton();
+        addChargesbtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         countLbl = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        deleteBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(serviceportal.ServicePortalApp.class).getContext().getResourceMap(SearchComplaint.class);
@@ -129,14 +130,6 @@ public class SearchComplaint extends javax.swing.JFrame {
             }
         });
 
-        deleteBtn.setText(resourceMap.getString("deleteBtn.text")); // NOI18N
-        deleteBtn.setName("deleteBtn"); // NOI18N
-        deleteBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteBtnActionPerformed(evt);
-            }
-        });
-
         deliverBtn.setText(resourceMap.getString("deliverBtn.text")); // NOI18N
         deliverBtn.setName("deliverBtn"); // NOI18N
         deliverBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -150,6 +143,14 @@ public class SearchComplaint extends javax.swing.JFrame {
         complButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 complButtonActionPerformed(evt);
+            }
+        });
+
+        addChargesbtn.setText(resourceMap.getString("addChargesbtn.text")); // NOI18N
+        addChargesbtn.setName("addChargesbtn"); // NOI18N
+        addChargesbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addChargesbtnActionPerformed(evt);
             }
         });
 
@@ -176,31 +177,32 @@ public class SearchComplaint extends javax.swing.JFrame {
                 .addComponent(deliverBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(updatebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addGap(32, 32, 32)
+                .addComponent(addChargesbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Searchbtn, complButton, deleteBtn, deliverBtn, statusBtn, updatebtn});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Searchbtn, complButton, deliverBtn, statusBtn, updatebtn});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Searchbtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(updatebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(deliverBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(statusBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(complButton)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addChargesbtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(Searchbtn, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                        .addComponent(updatebtn, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                        .addComponent(deliverBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                        .addComponent(statusBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                        .addComponent(complButton, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))))
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Searchbtn, complButton, deleteBtn, deliverBtn, statusBtn, updatebtn});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Searchbtn, complButton, deliverBtn, statusBtn, updatebtn});
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(10, 11, 1250, 77);
@@ -281,6 +283,17 @@ public class SearchComplaint extends javax.swing.JFrame {
             jLabel3.setBounds(490, 100, 120, 14);
             jLabel3.setVisible(false);
 
+            deleteBtn.setText(resourceMap.getString("deleteBtn.text")); // NOI18N
+            deleteBtn.setName("deleteBtn"); // NOI18N
+            deleteBtn.addActionListener(new java.awt.event.ActionListener() {
+                public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    deleteBtnActionPerformed(evt);
+                }
+            });
+            getContentPane().add(deleteBtn);
+            deleteBtn.setBounds(950, 670, 100, 39);
+            deleteBtn.setVisible(false);
+
             java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
             setBounds((screenSize.width-1366)/2, (screenSize.height-768)/2, 1366, 768);
         }// </editor-fold>//GEN-END:initComponents
@@ -354,17 +367,6 @@ public class SearchComplaint extends javax.swing.JFrame {
         st.setServiceID(serviceID);
     }//GEN-LAST:event_statusBtnActionPerformed
 
-    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
-        // TODO add your handling code here:
-        if(serviceID.equals(""))
-        {
-            JOptionPane.showMessageDialog(null,"Please select a row","Row Not Selected",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        deleteComplaint();
-        searchDB();
-    }//GEN-LAST:event_deleteBtnActionPerformed
-
 
     private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
         // TODO add your handling code here:
@@ -420,6 +422,25 @@ public class SearchComplaint extends javax.swing.JFrame {
         newC.setVisible(true);
     }//GEN-LAST:event_complButtonActionPerformed
 
+    private void deleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBtnActionPerformed
+        // TODO add your handling code here:
+        if(serviceID.equals("")) {
+            JOptionPane.showMessageDialog(null,"Please select a row","Row Not Selected",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        deleteComplaint();
+        searchDB();
+}//GEN-LAST:event_deleteBtnActionPerformed
+
+    private void addChargesbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addChargesbtnActionPerformed
+        // TODO add your handling code here:
+
+        AddCharges a = new AddCharges();
+        a.setServiceId(serviceID);
+        a.loadCombo();
+        a.setVisible(true);
+    }//GEN-LAST:event_addChargesbtnActionPerformed
+
 
     /**
     * @param args the command line arguments
@@ -436,6 +457,7 @@ public class SearchComplaint extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Searchbtn;
+    private javax.swing.JButton addChargesbtn;
     private javax.swing.JButton complButton;
     private javax.swing.JLabel countLbl;
     private javax.swing.JButton deleteBtn;
