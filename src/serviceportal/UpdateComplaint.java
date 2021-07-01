@@ -482,6 +482,7 @@ public class UpdateComplaint extends javax.swing.JFrame {
           if(j==0)
           {
               JOptionPane.showMessageDialog(null,"Update Error","Error",JOptionPane.ERROR_MESSAGE);
+              return;
           }
 
            JOptionPane.showMessageDialog(this,"Database Updated Successfully");

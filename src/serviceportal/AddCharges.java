@@ -11,6 +11,10 @@
 
 package serviceportal;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author sgjohn
@@ -46,6 +50,7 @@ public class AddCharges extends javax.swing.JFrame {
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(serviceportal.ServicePortalApp.class).getContext().getResourceMap(AddCharges.class);
         setBackground(resourceMap.getColor("Form.background")); // NOI18N
         setName("Form"); // NOI18N
+        setResizable(false);
 
         jPanel1.setBackground(resourceMap.getColor("jPanel1.background")); // NOI18N
         jPanel1.setName("jPanel1"); // NOI18N
@@ -82,6 +87,11 @@ public class AddCharges extends javax.swing.JFrame {
 
         updatebtn.setText(resourceMap.getString("updatebtn.text")); // NOI18N
         updatebtn.setName("updatebtn"); // NOI18N
+        updatebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatebtnActionPerformed(evt);
+            }
+        });
 
         complaints.setName("complaints"); // NOI18N
 
@@ -154,7 +164,7 @@ public class AddCharges extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,6 +176,47 @@ public class AddCharges extends javax.swing.JFrame {
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-616)/2, (screenSize.height-449)/2, 616, 449);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void updatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtnActionPerformed
+        // TODO add your handling code here:
+        String amount = charges.getText();
+        String comp = complaints.getSelectedItem().toString();
+         DateFormat df = new SimpleDateFormat("dd-MMM-yy");
+        DateFormat dt = new SimpleDateFormat("HH:mm");
+         Calendar cal = Calendar.getInstance();
+        String rdate = df.format(cal.getTime());
+        String rtime = dt.format(cal.getTime());
+        Connection con = DBConnection.getConnection();
+
+        try
+        {
+           Statement st = con.createStatement();
+
+           int j= st.executeUpdate("insert into extracharges values('"+serviceid.getText()+"','"+amount+"'" +
+                   ",'"+rdate+"','"+rtime+"','"+comp+"','"+ServicePortalApp.getUsername()+"')");
+           if(j==0)
+           {
+               JOptionPane.showMessageDialog(null,"Update Error","Error",JOptionPane.ERROR_MESSAGE);
+              return;
+           }
+           else
+           {
+                JOptionPane.showMessageDialog(null,"successfully updated");
+                this.dispose();
+           }
+
+        }
+        catch(Exception  e)
+        {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+    }//GEN-LAST:event_updatebtnActionPerformed
 
     /**
     * @param args the command line arguments
