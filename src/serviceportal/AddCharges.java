@@ -46,7 +46,7 @@ public class AddCharges extends javax.swing.JFrame {
         serviceid = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(serviceportal.ServicePortalApp.class).getContext().getResourceMap(AddCharges.class);
         setBackground(resourceMap.getColor("Form.background")); // NOI18N
         setName("Form"); // NOI18N
@@ -188,6 +188,14 @@ public class AddCharges extends javax.swing.JFrame {
         String rtime = dt.format(cal.getTime());
         Connection con = DBConnection.getConnection();
 
+
+        if(!this.deliveryStatus(serviceid.getText()))
+        {
+            JOptionPane.showMessageDialog(null,"Adding Charges not possible","Error",JOptionPane.ERROR_MESSAGE);
+            this.dispose();
+            return;
+        }
+
         try
         {
            Statement st = con.createStatement();
@@ -271,4 +279,108 @@ public void setServiceId(String sid)
             e.printStackTrace();
         }
     }
+
+ public int getCharges(String sid)
+ {
+     Connection con =DBConnection.getConnection();
+     int amount=0;
+     try
+     {
+         Statement st = con.createStatement();
+
+        ResultSet rs =  st.executeQuery("select charges from extracharges where serviceid='"+sid+"'");
+
+        while(rs.next())
+        {
+            amount=rs.getInt("charges");
+        }
+     }
+
+     catch(Exception e)
+     {
+         e.printStackTrace();
+     }
+     return amount;
+ }
+
+public String getComplaint(String sid)
+{
+    Connection con =DBConnection.getConnection();
+     String comp="";
+     try
+     {
+         Statement st = con.createStatement();
+
+        ResultSet rs =  st.executeQuery("select complaint from extracharges where serviceid='"+sid+"'");
+
+        while(rs.next())
+        {
+            comp=rs.getString("Complaint");
+        }
+     }
+
+     catch(Exception e)
+     {
+         e.printStackTrace();
+     }
+     return comp;
+
+}
+
+public Boolean checkServiceId(String sid)
+{
+    Boolean status=false;
+    int count=0;
+    Connection con =DBConnection.getConnection();
+    try
+     {
+         Statement st = con.createStatement();
+
+        ResultSet rs =  st.executeQuery("select charges from extracharges where serviceid='"+sid+"'");
+
+        while(rs.next())
+        {
+           count++;
+        }
+     }
+
+     catch(Exception e)
+     {
+         e.printStackTrace();
+     }
+    if(count!=0)
+    {
+        return false;
+    }
+    else
+        return true;
+}
+
+public Boolean deliveryStatus(String sid)
+{
+  Connection con =DBConnection.getConnection();
+  String dstatus="";
+  try
+     {
+         Statement st = con.createStatement();
+
+        ResultSet rs =  st.executeQuery("select delivery_status from status where receipt_no='"+sid+"'");
+
+        while(rs.next())
+        {
+           dstatus=rs.getString("delivery_status");
+        }
+     }
+  
+     catch(Exception e)
+     {
+         e.printStackTrace();
+     }
+   if(dstatus.equals("NO"))
+      return true;
+    else
+      return false;
+}
+
+
 }

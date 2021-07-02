@@ -190,16 +190,16 @@ public class SearchComplaint extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(addChargesbtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Searchbtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(updatebtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(deliverBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(statusBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addComponent(complButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel2)
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Searchbtn, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                        .addComponent(updatebtn, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                        .addComponent(deliverBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                        .addComponent(statusBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE)
-                        .addComponent(complButton, javax.swing.GroupLayout.DEFAULT_SIZE, 39, Short.MAX_VALUE))))
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Searchbtn, complButton, deliverBtn, statusBtn, updatebtn});
@@ -230,6 +230,9 @@ public class SearchComplaint extends javax.swing.JFrame {
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jTable1MouseReleased(evt);
             }
         });
         jTable1.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -333,7 +336,7 @@ public class SearchComplaint extends javax.swing.JFrame {
         int selectedRow[] = jTable1.getSelectedRows();
         int selectedCol[] = jTable1.getSelectedColumns();
         String selectedData=null,str="";
-        for(int i=0;i<selectedRow.length;i++)
+       for(int i=0;i<selectedRow.length;i++)
         {
             for(int j=0;j<selectedCol.length;j++)
             {
@@ -435,11 +438,42 @@ public class SearchComplaint extends javax.swing.JFrame {
     private void addChargesbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addChargesbtnActionPerformed
         // TODO add your handling code here:
 
+        if(serviceID.equals(""))
+        {
+            JOptionPane.showMessageDialog(null,"Please select a row","Row Not Selected",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+       
         AddCharges a = new AddCharges();
         a.setServiceId(serviceID);
+        if(!a.checkServiceId(serviceID))
+        {
+            JOptionPane.showMessageDialog(null,"Charges already added","Error",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         a.loadCombo();
         a.setVisible(true);
     }//GEN-LAST:event_addChargesbtnActionPerformed
+
+    private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
+        // TODO add your handling code here:
+         int selectedRow[] = jTable1.getSelectedRows();
+        int selectedCol[] = jTable1.getSelectedColumns();
+        String selectedData=null,str="";
+        for(int i=0;i<selectedRow.length;i++)
+        {
+            for(int j=0;j<selectedCol.length;j++)
+            {
+                str=jTable1.getColumnName(selectedCol[j]);
+                str=str +": "+ (String) jTable1.getValueAt(selectedRow[i], selectedCol[j]);
+
+                selectedData=(String) jTable1.getValueAt(selectedRow[i], 6);
+            }
+        }
+        serviceID=selectedData;
+   
+    }//GEN-LAST:event_jTable1MouseReleased
 
 
     /**
