@@ -73,9 +73,9 @@
                   <Component id="deliverBtn" linkSize="3" min="-2" pref="81" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="updatebtn" linkSize="3" min="-2" pref="79" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="deleteBtn" linkSize="3" min="-2" pref="77" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="addChargesbtn" min="-2" pref="100" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -83,17 +83,19 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="Searchbtn" linkSize="4" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                      <Component id="deleteBtn" linkSize="4" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="updatebtn" linkSize="4" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="deliverBtn" linkSize="4" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="statusBtn" linkSize="4" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                      <Component id="complButton" linkSize="4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="addChargesbtn" alignment="1" pref="39" max="32767" attributes="1"/>
+                      <Component id="Searchbtn" linkSize="4" alignment="1" pref="39" max="32767" attributes="1"/>
+                      <Component id="updatebtn" linkSize="4" alignment="1" pref="39" max="32767" attributes="1"/>
+                      <Component id="deliverBtn" linkSize="4" alignment="1" pref="39" max="32767" attributes="1"/>
+                      <Component id="statusBtn" linkSize="4" alignment="1" pref="39" max="32767" attributes="1"/>
+                      <Component id="complButton" linkSize="4" alignment="1" pref="39" max="32767" attributes="1"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
           </Group>
@@ -177,15 +179,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="statusBtnActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="deleteBtn">
-          <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="deleteBtn.text"/>
-            <Property name="name" type="java.lang.String" value="deleteBtn" noResource="true"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteBtnActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JButton" name="deliverBtn">
           <Properties>
             <Property name="text" type="java.lang.String" resourceKey="deliverBtn.text"/>
@@ -202,6 +195,15 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="complButtonActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="addChargesbtn">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="addChargesbtn.text"/>
+            <Property name="name" type="java.lang.String" value="addChargesbtn" noResource="true"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addChargesbtnActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -274,6 +276,7 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseClicked"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable1MouseReleased"/>
                 <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jTable1PropertyChange"/>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTable1KeyPressed"/>
               </Events>
@@ -311,6 +314,23 @@
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="490" y="100" width="120" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JButton" name="deleteBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="deleteBtn.text"/>
+        <Property name="name" type="java.lang.String" value="deleteBtn" noResource="true"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteBtnActionPerformed"/>
+      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="deleteBtn.setVisible(false);"/>
+      </AuxValues>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="950" y="670" width="100" height="39"/>
         </Constraint>
       </Constraints>
     </Component>

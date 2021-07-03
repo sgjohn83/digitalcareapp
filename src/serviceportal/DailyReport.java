@@ -38,6 +38,7 @@ public class DailyReport extends javax.swing.JFrame {
 
 
    String serviceID;
+   public static int sum_charges=0;
 
     /** Creates new form DailyReport */
     public DailyReport() {
@@ -76,10 +77,11 @@ public class DailyReport extends javax.swing.JFrame {
         completedlbl = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         countlbl = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        acosts = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(serviceportal.ServicePortalApp.class).getContext().getResourceMap(DailyReport.class);
-        setTitle(resourceMap.getString("Form.title")); // NOI18N
         setBackground(resourceMap.getColor("Form.background")); // NOI18N
         setName("Form"); // NOI18N
         getContentPane().setLayout(null);
@@ -216,14 +218,14 @@ public class DailyReport extends javax.swing.JFrame {
         amountlbl.setText(resourceMap.getString("amountlbl.text")); // NOI18N
         amountlbl.setName("amountlbl"); // NOI18N
         jPanel3.add(amountlbl);
-        amountlbl.setBounds(1046, 10, 150, 41);
+        amountlbl.setBounds(1030, 40, 150, 30);
 
         jLabel1.setFont(resourceMap.getFont("jLabel1.font")); // NOI18N
         jLabel1.setForeground(resourceMap.getColor("jLabel1.foreground")); // NOI18N
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
         jPanel3.add(jLabel1);
-        jLabel1.setBounds(850, 10, 190, 32);
+        jLabel1.setBounds(850, 50, 190, 19);
 
         jLabel3.setFont(resourceMap.getFont("jLabel7.font")); // NOI18N
         jLabel3.setForeground(resourceMap.getColor("jLabel3.foreground")); // NOI18N
@@ -265,21 +267,35 @@ public class DailyReport extends javax.swing.JFrame {
         completedlbl.setText(resourceMap.getString("completedlbl.text")); // NOI18N
         completedlbl.setName("completedlbl"); // NOI18N
         jPanel3.add(completedlbl);
-        completedlbl.setBounds(390, 30, 40, 30);
+        completedlbl.setBounds(390, 30, 40, 20);
 
         jLabel8.setFont(resourceMap.getFont("jLabel8.font")); // NOI18N
         jLabel8.setForeground(resourceMap.getColor("jLabel8.foreground")); // NOI18N
         jLabel8.setText(resourceMap.getString("jLabel8.text")); // NOI18N
         jLabel8.setName("jLabel8"); // NOI18N
         jPanel3.add(jLabel8);
-        jLabel8.setBounds(850, 57, 230, 32);
+        jLabel8.setBounds(850, 80, 160, 19);
 
         countlbl.setFont(resourceMap.getFont("countlbl.font")); // NOI18N
         countlbl.setForeground(resourceMap.getColor("countlbl.foreground")); // NOI18N
         countlbl.setText(resourceMap.getString("countlbl.text")); // NOI18N
         countlbl.setName("countlbl"); // NOI18N
         jPanel3.add(countlbl);
-        countlbl.setBounds(1080, 50, 150, 41);
+        countlbl.setBounds(1030, 80, 150, 20);
+
+        jLabel6.setFont(resourceMap.getFont("jLabel6.font")); // NOI18N
+        jLabel6.setForeground(resourceMap.getColor("jLabel6.foreground")); // NOI18N
+        jLabel6.setText(resourceMap.getString("jLabel6.text")); // NOI18N
+        jLabel6.setName("jLabel6"); // NOI18N
+        jPanel3.add(jLabel6);
+        jLabel6.setBounds(850, 20, 160, 19);
+
+        acosts.setFont(resourceMap.getFont("acosts.font")); // NOI18N
+        acosts.setForeground(resourceMap.getColor("acosts.foreground")); // NOI18N
+        acosts.setText(resourceMap.getString("acosts.text")); // NOI18N
+        acosts.setName("acosts"); // NOI18N
+        jPanel3.add(acosts);
+        acosts.setBounds(1030, 20, 120, 20);
 
         getContentPane().add(jPanel3);
         jPanel3.setBounds(30, 560, 1280, 110);
@@ -289,7 +305,7 @@ public class DailyReport extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void getReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getReportActionPerformed
-          // TODO add your handling code here:
+        // TODO add your handling code here:
         String formatted;
         java.util.Date d  = date1.getDate();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yy");
@@ -303,7 +319,7 @@ public class DailyReport extends javax.swing.JFrame {
         }
 
 
-
+       
         String url="select serviceid as ReceiptNo,phone_model,complaint_name,Received_amount as amount,type,to_char(received_date,'dd-MM-yy') as received_date,recieved_time,received_by,cashmode,status,delivery_status from payments p,status s,complaint c where p.serviceid=s.receipt_no and p.serviceid=c.receipt_no and  received_date='"+formatted+"'";
 
 
@@ -365,6 +381,7 @@ public class DailyReport extends javax.swing.JFrame {
             amount=   amount + rs2.getInt(1);
 
            }
+          amount = amount + sum_charges;
           String a= ""+amount;
           amountlbl.setText(a);
           // Delivery Count
@@ -396,6 +413,7 @@ public class DailyReport extends javax.swing.JFrame {
            rs2=sa.executeQuery("select count(distinct serviceid) from payments p,status s where p.serviceid=s.receipt_no and received_date='"+formatted+"' and (received_amount!=0 or status='Failed' or status='Cancelled')");
           rs2.next();
          countlbl.setText(rs2.getString(1));
+         acosts.setText(sum_charges+"");
 
 
 
@@ -404,6 +422,8 @@ public class DailyReport extends javax.swing.JFrame {
        {
            e.printStackTrace();
        }
+
+
     }//GEN-LAST:event_getReportActionPerformed
 
     private void reportItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_reportItemStateChanged
@@ -467,6 +487,7 @@ public class DailyReport extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel acosts;
     private javax.swing.JLabel amountlbl;
     private javax.swing.JLabel completedlbl;
     private javax.swing.JLabel countlbl;
@@ -479,6 +500,7 @@ public class DailyReport extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
@@ -504,6 +526,7 @@ class QueryTableModel12 extends AbstractTableModel {
   Statement statement;
 
   String currentURL;
+  int total=0;
 
   public QueryTableModel12() {
     cache = new Vector();
@@ -554,13 +577,16 @@ class QueryTableModel12 extends AbstractTableModel {
       // Execute the query and store the result set and its metadata
       ResultSet rs = statement.executeQuery(q);
       ResultSetMetaData meta = rs.getMetaData();
-      colCount = meta.getColumnCount();
+      colCount = meta.getColumnCount()+1;
 
       // Now we must rebuild the headers array with the new column names
-      headers = new String[colCount];
-      for (int h = 1; h <= colCount; h++) {
+      headers = new String[colCount+1];
+      int x=0;
+      for (int h = 1; h <= colCount-1; h++) {
         headers[h - 1] = meta.getColumnName(h);
+        x=h;
       }
+      headers[x]="Additional Charges";
 
       // and file the cache with the records from our query. This would
       // not be
@@ -568,14 +594,25 @@ class QueryTableModel12 extends AbstractTableModel {
       // to our
       // query, but we aren't, so we can do this.
       DateFormat df= new SimpleDateFormat("dd-MMM-yy");
+      AddCharges a = new AddCharges();
+      int charges=0;
       while (rs.next()) {
-        String[] record = new String[colCount];
-        for (int i = 0; i < colCount; i++) {
+        String[] record = new String[colCount+1];
+        if(rs.getString("type").equals("advance"))
+            charges=0;
+        else
+            charges = a.getCharges(rs.getString("receiptno"));
+        total+=charges;
+        int j=0;
+        for (int i = 0; i < colCount-1; i++) {
 
            record[i] = rs.getString(i + 1);
+           j=i;
         }
+        record[j+1]=new Integer(charges).toString();
         cache.addElement(record);
       }
+      DailyReport.sum_charges=total;
       fireTableChanged(null); // notify everyone that we have a new table.
     } catch (Exception e) {
       cache = new Vector(); // blank it out and keep going.
@@ -606,17 +643,19 @@ class QueryTableModel12 extends AbstractTableModel {
       e.printStackTrace();
     }
   }
+
+
 }
 class MyTableRender12 extends DefaultTableCellRenderer
 {
 
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-        Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+       Component comp = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 
        String status=SearchComplaint.getStatusMode();
 
        Font f = new Font("Courier",Font.PLAIN,24);
-        comp.setFont(f);
+        comp.setFont(f); 
        if(!isSelected)
        {
             if(column!=0)
@@ -626,33 +665,33 @@ class MyTableRender12 extends DefaultTableCellRenderer
                  comp.setFont(f2);
              if(table.getValueAt(row, 9).equals("New") && table.getValueAt(row, 10).equals("NO"))
               {
-
+                
                  comp.setBackground(Color.WHITE);
               }
               else if(table.getValueAt(row, 9).equals("Pending") && table.getValueAt(row, 10).equals("NO"))
               {
-
+               
                   comp.setBackground(Color.YELLOW);
               }
                else if(table.getValueAt(row, 9).equals("Completed") && table.getValueAt(row, 10).equals("NO"))
               {
-
+                   
                    comp.setBackground(Color.GREEN);
               }
                 else if((table.getValueAt(row, 9).equals("Failed") || table.getValueAt(row, 9).equals("Cancelled")) && table.getValueAt(row, 10).equals("NO"))
               {
-
+                 
                     comp.setBackground(Color.RED);
               }
               else if((table.getValueAt(row, 9).equals("Failed") || table.getValueAt(row, 9).equals("Cancelled")) && table.getValueAt(row, 10).equals("Delivered"))
               {
-
-
+                 
+                  
                   comp.setBackground(Color.magenta);
               }
                 else if(table.getValueAt(row, 10).equals("Delivered"))
                 {
-
+                    
                     comp.setBackground(Color.BLUE);
                 }
                 else if(table.getValueAt(row, 10).equals("Returned"))
@@ -664,7 +703,7 @@ class MyTableRender12 extends DefaultTableCellRenderer
             /*   Color c = table.getBackground();
            if((row%2==0) && c.getRed()>10 && c.getGreen()>10 && c.getBlue()>10 )
              comp.setBackground(Color.WHITE);
-             *
+             * 
            else
                comp.setBackground(new Color(238, 224, 229)); */
              else if(column==0)
