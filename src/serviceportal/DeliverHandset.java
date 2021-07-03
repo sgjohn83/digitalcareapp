@@ -90,7 +90,8 @@ private static String serID="";
            }
            String recvd_by = ServicePortalApp.getUsername();
         
-          JLabel label = new JLabel("Pay Amount:"+bal);
+          int b=bal+new AddCharges().getCharges(serID);
+           JLabel label = new JLabel("Pay Amount:"+b);
           label.setFont(new Font("serif", Font.PLAIN, 25));
           int x= JOptionPane.showConfirmDialog(null, label,"payment confirmation "+serID,JOptionPane.YES_NO_OPTION);
           String op="";

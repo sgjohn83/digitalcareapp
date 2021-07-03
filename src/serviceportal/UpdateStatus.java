@@ -181,7 +181,8 @@ public class UpdateStatus extends javax.swing.JFrame {
             {
                System.out.print("insert into payments values('"+ServiceId+"',"+ -adv+",'"+ df.format(cal.getTime())+"','"+ dt.format(cal.getTime())+"','"+ ServicePortalApp.getUsername()+"')");
                stmt.executeUpdate("update complaint set balance="+ -adv+" where receipt_no like '%"+ServiceId+"%'");
-             //  stmt.executeUpdate("insert into payments values('"+ServiceId+"',"+ -adv+",'advance','"+ df.format(cal.getTime())+"','"+ dt.format(cal.getTime())+"','"+ ServicePortalApp.getUsername()+"','Direct Cash')");
+               stmt.executeUpdate("delete from extracharges where serviceid='"+ServiceId+"'");
+               //  stmt.executeUpdate("insert into payments values('"+ServiceId+"',"+ -adv+",'advance','"+ df.format(cal.getTime())+"','"+ dt.format(cal.getTime())+"','"+ ServicePortalApp.getUsername()+"','Direct Cash')");
 
            }
            if(remarks==null || remarks.equals(""))

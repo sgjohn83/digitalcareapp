@@ -532,6 +532,8 @@ public class SearchComplaint extends javax.swing.JFrame {
         {
             delCon=DBConnection.getConnection();
             delSt=delCon.createStatement();
+
+            delSt.executeUpdate("delete from extracharges where serviceid='"+serviceID+"'");
             delSt.executeUpdate("delete from cancelled where receipt_no='"+serviceID+"'");
             delSt.executeUpdate("delete from delivery where receipt_no='"+serviceID+"'");
             delSt.executeUpdate("delete from status where receipt_no='"+serviceID+"'");

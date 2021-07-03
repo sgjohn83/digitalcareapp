@@ -360,15 +360,17 @@ public Boolean deliveryStatus(String sid)
 {
   Connection con =DBConnection.getConnection();
   String dstatus="";
+  String status="";
   try
      {
          Statement st = con.createStatement();
 
-        ResultSet rs =  st.executeQuery("select delivery_status from status where receipt_no='"+sid+"'");
+        ResultSet rs =  st.executeQuery("select status,delivery_status from status where receipt_no='"+sid+"'");
 
         while(rs.next())
         {
-           dstatus=rs.getString("delivery_status");
+            status=rs.getString("status");
+            dstatus=rs.getString("delivery_status");
         }
      }
   
@@ -376,10 +378,10 @@ public Boolean deliveryStatus(String sid)
      {
          e.printStackTrace();
      }
-   if(dstatus.equals("NO"))
-      return true;
-    else
+   if(dstatus.equals("Delivered") || status.equals("Failed") || status.equals("Cancelled"))
       return false;
+   else
+       return true;
 }
 
 

@@ -478,6 +478,10 @@ public class UpdateComplaint extends javax.swing.JFrame {
                sa.executeUpdate("delete from payments where serviceid="+serviceid.getText());
                sa.executeUpdate("insert into payments values('"+serviceid.getText()+"',"+Integer.parseInt(advancestr)+",'advance','"+recvd_date+"','"+recvd_time+"','"+recvd_by+"','"+ c1+"')");
            }
+           else
+           {
+               sa.executeUpdate("update payments set received_amount="+Integer.parseInt(advancestr)+"where serviceid='"+serviceid.getText()+"' and type='advance'");
+           }
 
           if(j==0)
           {

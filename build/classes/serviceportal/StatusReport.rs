@@ -1,3 +1,0 @@
-serviceportal.StatusTable
-serviceportal.StatusRender
-serviceportal.StatusReport
