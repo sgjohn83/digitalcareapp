@@ -109,22 +109,23 @@
         <Component class="javax.swing.JComboBox" name="jComboBox1">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="15">
+              <StringArray count="16">
                 <StringItem index="0" value="ALL"/>
                 <StringItem index="1" value="Service ID"/>
                 <StringItem index="2" value="ALL2"/>
                 <StringItem index="3" value="ALL3"/>
-                <StringItem index="4" value="Contact No"/>
-                <StringItem index="5" value="Technician"/>
-                <StringItem index="6" value="Customer Name"/>
-                <StringItem index="7" value="IMEI NO"/>
-                <StringItem index="8" value="Phone Model"/>
-                <StringItem index="9" value="New"/>
-                <StringItem index="10" value="Pending"/>
-                <StringItem index="11" value="Completed"/>
-                <StringItem index="12" value="Failed"/>
-                <StringItem index="13" value="Delivered"/>
-                <StringItem index="14" value="Returned"/>
+                <StringItem index="4" value="ByComplaint"/>
+                <StringItem index="5" value="Contact No"/>
+                <StringItem index="6" value="Technician"/>
+                <StringItem index="7" value="Customer Name"/>
+                <StringItem index="8" value="IMEI NO"/>
+                <StringItem index="9" value="Phone Model"/>
+                <StringItem index="10" value="New"/>
+                <StringItem index="11" value="Pending"/>
+                <StringItem index="12" value="Completed"/>
+                <StringItem index="13" value="Failed"/>
+                <StringItem index="14" value="Delivered"/>
+                <StringItem index="15" value="Returned"/>
               </StringArray>
             </Property>
             <Property name="name" type="java.lang.String" value="jComboBox1" noResource="true"/>

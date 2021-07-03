@@ -85,7 +85,7 @@ public class SearchComplaint extends javax.swing.JFrame {
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ALL", "Service ID", "ALL2", "ALL3", "Contact No", "Technician", "Customer Name", "IMEI NO", "Phone Model", "New", "Pending", "Completed", "Failed", "Delivered", "Returned" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ALL", "Service ID", "ALL2", "ALL3", "ByComplaint", "Contact No", "Technician", "Customer Name", "IMEI NO", "Phone Model", "New", "Pending", "Completed", "Failed", "Delivered", "Returned" }));
         jComboBox1.setName("jComboBox1"); // NOI18N
 
         jTextField1.setText(resourceMap.getString("jTextField1.text")); // NOI18N
@@ -543,7 +543,11 @@ public class SearchComplaint extends javax.swing.JFrame {
            url=sql1+" from complaint c,status s where  c.receipt_no=s.receipt_no and delivery_status='NO'  order by decode(status,'New',1,'Pending',2,'Completed',3,'Failed',4,'Cancelled',5),c.receipt_no asc";
            statusMode="";
        }
-
+       else if(jComboBox1.getSelectedItem().equals("ByComplaint"))
+       {
+           url=sql1+" from complaint c,status s where  c.receipt_no=s.receipt_no and delivery_status='NO'  order by soundex(complaint_name),decode(status,'New',1,'Pending',2,'Completed',3,'Failed',4,'Cancelled',5)";
+           statusMode="";
+       }
        else if(jComboBox1.getSelectedItem().equals("New"))
        {
            url=sql1+ " from complaint c,status s where c.receipt_no=s.receipt_no and c.receipt_no in " +
