@@ -598,7 +598,10 @@ class QueryTableModel12 extends AbstractTableModel {
       int charges=0;
       while (rs.next()) {
         String[] record = new String[colCount+1];
-        charges = a.getCharges(rs.getString("receiptno"));
+        if(rs.getString("type").equals("advance"))
+            charges=0;
+        else
+            charges = a.getCharges(rs.getString("receiptno"));
         total+=charges;
         int j=0;
         for (int i = 0; i < colCount-1; i++) {
