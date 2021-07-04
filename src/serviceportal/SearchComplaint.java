@@ -31,6 +31,7 @@ public class SearchComplaint extends javax.swing.JFrame {
     /** Creates new form SearchComplaint */
 
     String serviceID;
+    public static int bal;
     public SearchComplaint() {
       
         initComponents();
@@ -63,6 +64,9 @@ public class SearchComplaint extends javax.swing.JFrame {
         countLbl = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         deleteBtn = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        pendingBalance = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(serviceportal.ServicePortalApp.class).getContext().getResourceMap(SearchComplaint.class);
@@ -263,7 +267,8 @@ public class SearchComplaint extends javax.swing.JFrame {
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1238, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             );
             jPanel2Layout.setVerticalGroup(
                 jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -271,7 +276,7 @@ public class SearchComplaint extends javax.swing.JFrame {
             );
 
             getContentPane().add(jPanel2);
-            jPanel2.setBounds(0, 130, 1260, 510);
+            jPanel2.setBounds(0, 130, 1340, 510);
 
             countLbl.setFont(resourceMap.getFont("countLbl.font")); // NOI18N
             countLbl.setText(resourceMap.getString("countLbl.text")); // NOI18N
@@ -294,8 +299,46 @@ public class SearchComplaint extends javax.swing.JFrame {
                 }
             });
             getContentPane().add(deleteBtn);
-            deleteBtn.setBounds(950, 670, 100, 39);
+            deleteBtn.setBounds(570, 660, 100, 39);
             deleteBtn.setVisible(false);
+
+            jPanel3.setBackground(resourceMap.getColor("jPanel3.background")); // NOI18N
+            jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+            jPanel3.setName("jPanel3"); // NOI18N
+
+            jLabel4.setFont(resourceMap.getFont("jLabel4.font")); // NOI18N
+            jLabel4.setForeground(resourceMap.getColor("jLabel4.foreground")); // NOI18N
+            jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
+            jLabel4.setName("jLabel4"); // NOI18N
+
+            pendingBalance.setFont(resourceMap.getFont("pendingBalance.font")); // NOI18N
+            pendingBalance.setForeground(resourceMap.getColor("pendingBalance.foreground")); // NOI18N
+            pendingBalance.setText(resourceMap.getString("pendingBalance.text")); // NOI18N
+            pendingBalance.setName("pendingBalance"); // NOI18N
+
+            javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+            jPanel3.setLayout(jPanel3Layout);
+            jPanel3Layout.setHorizontalGroup(
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGap(24, 24, 24)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(pendingBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(27, Short.MAX_VALUE))
+            );
+            jPanel3Layout.setVerticalGroup(
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(pendingBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
+                    .addContainerGap())
+            );
+
+            getContentPane().add(jPanel3);
+            jPanel3.setBounds(970, 650, 340, 60);
 
             java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
             setBounds((screenSize.width-1366)/2, (screenSize.height-768)/2, 1366, 768);
@@ -347,6 +390,10 @@ public class SearchComplaint extends javax.swing.JFrame {
             }
         }
         serviceID=selectedData;
+
+        int total = getBalance(serviceID);
+
+        pendingBalance.setText(total+"");
         if(evt.getClickCount()==2)
         {
 
@@ -487,7 +534,35 @@ public class SearchComplaint extends javax.swing.JFrame {
 
             }
         });
+
+
     }
+
+    public int getBalance(String sid)
+    {
+        int charges = new AddCharges().getCharges(sid);
+
+        int balance=0;
+        Connection con = DBConnection.getConnection();
+
+        try
+        {
+           Statement st = con.createStatement();
+           ResultSet rs  = st.executeQuery("select balance from complaint where receipt_no='"+sid+"'");
+           while(rs.next())
+           {
+               balance=rs.getInt("balance");
+           }
+
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return balance+charges;
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Searchbtn;
@@ -500,11 +575,14 @@ public class SearchComplaint extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel pendingBalance;
     private javax.swing.JButton statusBtn;
     private javax.swing.JButton updatebtn;
     // End of variables declaration//GEN-END:variables
@@ -756,6 +834,7 @@ jTable1.setDefaultRenderer(Object.class, r);
   // we'd probably perform the query in a separate thread.
   public void setQuery(String q) {
     cache = new Vector();
+
     try {
       // Execute the query and store the result set and its metadata
    
@@ -777,6 +856,8 @@ jTable1.setDefaultRenderer(Object.class, r);
       DateFormat df= new SimpleDateFormat("dd-MMM-yy");
       while (rs.next()) {
         String[] record = new String[colCount];
+
+
         for (int i = 0; i < colCount; i++) {
           
            if(i==7)
