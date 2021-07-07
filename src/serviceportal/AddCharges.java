@@ -384,5 +384,21 @@ public Boolean deliveryStatus(String sid)
        return true;
 }
 
+public void updateCharges(String sid,int amount)
+{
+  Connection con =DBConnection.getConnection();
+  try
+     {
+         Statement st = con.createStatement();
+
+         st.executeUpdate("update extracharges set charges="+amount+"where serviceid='"+sid+"'");
+     }
+
+     catch(Exception e)
+     {
+         e.printStackTrace();
+     }
+}
+
 
 }

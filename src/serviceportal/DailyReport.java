@@ -347,7 +347,8 @@ public class DailyReport extends javax.swing.JFrame {
              url = url+" and received_by='"+userid.getText()+"',";
          }
 
- url = url+" and (received_amount!=0 or ((status='Failed' or status='Cancelled')and delivery_status='Delivered' )) order by serviceid";
+
+        url = url+" and (received_amount!=0 or (status='Failed' or status='Cancelled' or delivery_status='Delivered')) order by serviceid";
 
          QueryTableModel12 qtm;
          qtm=new QueryTableModel12();
