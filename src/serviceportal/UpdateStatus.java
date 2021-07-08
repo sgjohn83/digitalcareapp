@@ -188,7 +188,7 @@ public class UpdateStatus extends javax.swing.JFrame {
 
                if(extracharges>0)
                {
-                   new AddCharges().updateCharges(ServiceId,-extracharges);
+                   new AddCharges().updateCharges(ServiceId,0);
                }
 
             }

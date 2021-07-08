@@ -471,6 +471,8 @@ public class UpdateComplaint extends javax.swing.JFrame {
            
            int j = sa.executeUpdate(sqlQuery);
            String c1= cashMode==0 ? "Direct Cash" : "UPI";
+           if(cashMode==-1)
+               c1="Direct Cash";
            System.out.println("insert into payments values('"+serviceid.getText()+"',"+Integer.parseInt(advancestr)+",advance,'"+recvd_date+"','"+recvd_time+"','"+recvd_by+"','"+ c1+"')");
            if(advanceUpdate)
            {
@@ -665,10 +667,12 @@ public int setServiceID(String sid)
            mode=rs.getString("cashmode");
        }
 
-       if(mode.equals("Direct Cash"))
+       if(mode.equals(""))
        {
            cashopt.setSelectedIndex(0);
        }
+       else if(mode.equals("Direct Cash"))
+           cashopt.setSelectedIndex(0);
        else
            cashopt.setSelectedIndex(1);
 
@@ -689,6 +693,17 @@ public int setServiceID(String sid)
             {
                 jComboBox1.setSelectedItem(tech);
             }
+
+        rs=stmt.executeQuery("select * from status where receipt_no='"+serviceid.getText()+"'");
+        String status1="";
+        String status2="";
+        while(rs.next())
+        {
+          status1 = rs.getString("status");
+          status2= rs.getString("delivery_status");
+        }
+        if(status1.equals("Failed") || status1.equals("Cancelled") || status2.equals("Delivered"))
+           return -1;
         }
         catch(Exception e)
         {
